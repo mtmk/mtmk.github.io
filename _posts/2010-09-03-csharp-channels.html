@@ -1,13 +1,17 @@
+---
+redirect_from: "/cs-channels"
+title: C# channels
+---
 <html>
 <head>
-<title>C# channels</title>
+<title>{{ page.title }}</title>
 <meta name="viewport" content="width=device-width"/>
 <style>
 pre { background: lightgray;}
 </style>
 <head>
 <body>
-<h1>C# channels</h1>
+<h1>{{ page.title }}</h1>
 <br /><a href="http://golang.org/">Go</a> is one of the new languages I came across and found interesting from a few of different angles. First of all it is compiled and statically typed somewhat comparable to Java and C#. Second interesting aspect is it's syntax; Although it is basically a C-like syntax there is one thing would catch your eyes first is the variable declarations - they are wrong way round! Well, "that's weird" was my first reaction but when you kind of get used to it, variable name first, type last notation starts to makes (arguable) more sense. After all variable name is more important than it's type when it comes to thinking about your programs logic. Last but not least, the approach to concurrency is very sensible; it has beautiful concurrent constructs like <a href="http://golang.org/doc/effective_go.html#channels">channels</a> and Go Routines. This concurrency aspect interests me most and decided to do a little experiment in C#, implementing a very simple 'Channel'. (Hence this post and the cheese title)<br />
 As far as I understand, the basic idea is quite simple; while achieving concurrency instead of sharing state, pass the state through multiple queues avoiding hard-to-get-right synchronisation mechanisms. Possibly, like what you might have guessed (if you are coming from a computer science background, or read a few articles about how increasingly parallel we need to start making our programs, because the <a href="http://en.wikipedia.org/wiki/Moore's_law">Moore's Law</a> is not going to last forever and so on) the idea is not new at all. Actually in computer technology terms it's ancient history. I have come across a <a href="http://cacm.acm.org/magazines/2010/6/92479-the-resurgence-of-parallelism/fulltext">Communications of the ACM article</a> which had a section about <i>Determinate Computation</i> explaining the idea of using blocking tasks communicating through FIFO queues rather than shared memory. <br />
 I have been working with C# quite some time now and since I have used blocking queues (which I find very similar to Go Channels) for similar concurrency purposes before. It was a natural flow of thinking that I needed to implement some generic functionality and make it available to my applications in .Net. Although I must stress that; this is just an experiment and it is far from being a complete implementation. There are other crucial features missing to make it really useful and it is not test much and it is not used in production at all.<br />
