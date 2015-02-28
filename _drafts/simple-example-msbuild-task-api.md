@@ -1,20 +1,8 @@
 ---
-title: Simple Example: Using MSBuild Task API with C#
+layout: post
+title:  "Simple Example: MSBuild Task API"
+date:   2015-03-10 12:00:00
+categories: c# msbuild
 ---
-<html>
-<head>
-<title>{{ page.title }}</title>
-<meta name="viewport" content="width=device-width"/>
-<style>
-pre { background: lightgray;}
-</style>
-<head>
-<body>
 
-{{ page.title }}
-----------------
 
-example et lorem
-
-</body>
-</html>
