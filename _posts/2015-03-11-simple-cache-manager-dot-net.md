@@ -1,10 +1,9 @@
 ---
 layout: post
-title:  "Lightweight Cache Manager for .Net""
-date:   2015-03-11 17:30:00
+title: "Lightweight Cache Manager for .Net"
+date: 2015-03-11 17:30:00
 categories: c# caching
 ---
-
 Simple cache manger came out of a need to get rid of some bulky libraries to do the simple caching of data. It's only a couple of classes and easy to just copy-paste into your project.
 
 Here is the API:
