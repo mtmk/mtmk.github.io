@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "async and wait in C#"
+title:  "Lightweight Cache Manager for .Net""
 date:   2015-03-11 17:30:00
 categories: c# caching
 ---
