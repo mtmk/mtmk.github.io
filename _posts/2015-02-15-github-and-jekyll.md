@@ -3,6 +3,7 @@ layout: post
 title:  "Back to blogging with Jekyll on Github"
 date:   2015-02-15 22:18:04
 categories: Jekyll github blogging
+comments: true
 ---
 It's been a while since I posted any entries. I have been quite busy with stuff and so on (standard excuses). Now my blog is back on-line thanks to a super service provided by Github: [Github Pages](https://pages.github.com) and the awesome project [Jekyll](http://jekyllrb.com): A static site generation tool.
 

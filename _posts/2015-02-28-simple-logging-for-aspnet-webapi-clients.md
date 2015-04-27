@@ -3,6 +3,7 @@ layout: post
 title:  "Simple logging for ASP.NET Web API clients"
 date:   2015-02-28 19:30:00
 categories: c# asp.net webapi logging log4net
+comments: true
 ---
 This is a quick and dirty example of how you can enable a simple form of logging for clients
 using ASP.NET Web API. I used log4net and an extremely simple controller to achieve this.

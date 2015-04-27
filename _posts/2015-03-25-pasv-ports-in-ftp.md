@@ -3,6 +3,7 @@ layout: post
 title:  "PASV ports in FTP"
 date:   2015-03-25 23:30:00
 categories: ftp pasv binary
+comments: true
 ---
 I was looking to simulate an embedded device for testing and looking into FTP server implementations a simple bitwise operations question popped up: the way PASV command is standardized requires TCP port numbers to be transferred in two octets represented as integers.
 

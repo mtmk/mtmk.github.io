@@ -11,3 +11,5 @@ github_username:  mtmk
 
 # Build settings
 markdown: kramdown
+
+disqusid: "notesaboutsoftwaredevelopment"

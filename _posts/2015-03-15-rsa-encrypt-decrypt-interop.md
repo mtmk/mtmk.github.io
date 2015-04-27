@@ -3,6 +3,7 @@ layout: post
 title:  "RSA Encryption and Decryption on the Web"
 date:   2015-03-15 22:00:00
 categories: c# objective-c javascript java rsa crypto encryption decryption security web
+comments: true
 ---
 If you cannot enable SSL for whatever reason, you might still want to encrypt your sensitive information (such as passwords) over the wire. In this post I tried to put together a solution with working examples from various languages to make the client server communication secure using public cryptography with RSA.
 

@@ -11,5 +11,17 @@ layout: default
   <article class="post-content">
     {{ content }}
   </article>
-
+{% if page.comments %}
+<script type="text/javascript">
+    var disqus_shortname = 'notesaboutsoftwaredevelopment';
+    var disqus_identifier = "{{ site.disqusid }}{{ page.url | replace:'.html','' }}";
+    var disqus_title = '{{ page.title }}';
+    var disqus_url = "{{ site.url }}{{ page.url}}";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+{% endif %}
 </div>
