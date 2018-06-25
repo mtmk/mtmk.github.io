@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Notes about software development</title>
+    <link>http://ziya.suzen.net/</link>
+    <description>Recent content on Notes about software development</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 25 Jun 2018 08:53:46 +0100</lastBuildDate>
+    
+	<atom:link href="http://ziya.suzen.net/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>First</title>
+      <link>http://ziya.suzen.net/post/first/</link>
+      <pubDate>Mon, 25 Jun 2018 08:53:46 +0100</pubDate>
+      
+      <guid>http://ziya.suzen.net/post/first/</guid>
+      <description>First post.</description>
+    </item>
+    
+  </channel>
+</rss>
