@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="generator" content="Hugo 0.38.2" />
+
+        
+        <meta charset="utf-8">
+        <title>Lightweight Cache Manager for .Net</title>
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        
+        <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+        
+        <link rel="stylesheet" href="/css/normalize.css">
+        <link rel="stylesheet" href="/css/skeleton.css">
+
+        
+        <link rel="icon" type="image/png" href="images/favicon.png">
+
+    </head>
+    <body>
+
+        
+        <div class="container">
+            <div class="row">
+
+
+                
+  <h1>Lightweight Cache Manager for .Net</h1>
+  <div><p>Simple cache manger came out of a need to get rid of some bulky libraries to do the simple caching of data. It&rsquo;s only a couple of classes and easy to just copy-paste into your project.</p>
+
+<p>Here is the API:</p>
+
+<p>{% highlight c# %}
+var cacheManager = new CacheManager<string>();
+cacheManager.Add(&ldquo;key1&rdquo;, &ldquo;value1&rdquo;, DateTime.UtcNow, TimeSpan.FromSeconds(300));
+cacheManager.Add(&ldquo;key2&rdquo;, &ldquo;value2&rdquo;, DateTime.UtcNow, TimeSpan.FromSeconds(600));</p>
+
+<p>Assert.True(cacheManager.Contains(&ldquo;key1&rdquo;));
+Assert.True(cacheManager.Contains(&ldquo;key1&rdquo;));</p>
+
+<p>Assert.Equal(&ldquo;value1&rdquo;, cacheManager.GetData(&ldquo;key1&rdquo;));
+Assert.Equal(&ldquo;value1&rdquo;, cacheManager.GetData(&ldquo;key1&rdquo;));
+{% endhighlight %}</p>
+
+<p>It&rsquo;s as simple as that. Note the fact you need to pass the DateTime Now as a parameter? This is to make the testing easy. Maybe an overload can be used there.</p>
+
+<p>Internally it is a thin wrapper around a dictionary. Full code is in my <a href="https://github.com/mtmk/simple-cache-manager">mtmk GitHub repository with the same name as the post</a>.</p>
+
+<p>Enjoy</p>
+</div>
+  <div>March 11, 2015 | 123 Words</div>
+  <div>
+    
+  </div>
+  <div>
+    
+  </div>
+
+            </div>
+        </div>
+    </body>
+</html>

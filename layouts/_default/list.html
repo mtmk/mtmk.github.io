@@ -1,0 +1,21 @@
+{{ define "main" }}
+  <h1>{{ .Title }}</h1>
+  <p>{{ .Content }}</p>
+  {{ range .Data.Pages }}
+  <article>
+    <!-- this <div> includes the title summary -->
+    <div>
+      <h4><a href="{{ .RelPermalink }}">{{ .Title }}</a></h4>
+      <span>{{ .Date.Format "January 02, 2006" }}</span>
+      {{ .Summary }}
+    </div>
+    {{ if .Truncated }}
+    <!-- This <div> includes a read more link, but only if the summary is truncated... -->
+    <div>
+      <a href="{{ .RelPermalink }}">Read More…</a>
+    </div>
+    {{ end }}
+  </article>
+  <hr>
+  {{ end }}
+{{ end }}

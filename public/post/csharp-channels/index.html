@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="generator" content="Hugo 0.38.2" />
+
+        
+        <meta charset="utf-8">
+        <title>C# channels</title>
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        
+        <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+        
+        <link rel="stylesheet" href="/css/normalize.css">
+        <link rel="stylesheet" href="/css/skeleton.css">
+
+        
+        <link rel="icon" type="image/png" href="images/favicon.png">
+
+    </head>
+    <body>
+
+        
+        <div class="container">
+            <div class="row">
+
+
+                
+  <h1>C# channels</h1>
+  <div><p><a href="http://golang.org/">Go</a> is one of the new languages I came across and found interesting from a few of different angles. First of all it is compiled and statically typed somewhat comparable to Java and C#. Second interesting aspect is it&rsquo;s syntax; Although it is basically a C-like syntax there is one thing would catch your eyes first is the variable declarations - they are wrong way round! Well, &ldquo;that&rsquo;s weird&rdquo; was my first reaction but when you kind of get used to it, variable name first, type last notation starts to makes (arguable) more sense. After all variable name is more important than it&rsquo;s type when it comes to thinking about your programs logic. Last but not least, the approach to concurrency is very sensible; it has beautiful concurrent constructs like <a href="http://golang.org/doc/effective_go.html#channels">channels</a> and Go Routines. This concurrency aspect interests me most and decided to do a little experiment in C#, implementing a very simple &lsquo;Channel&rsquo;. (Hence this post and the cheese title)</p>
+
+<p>As far as I understand, the basic idea is quite simple; while achieving concurrency instead of sharing state, pass the state through multiple queues avoiding hard-to-get-right synchronisation mechanisms. Possibly, like what you might have guessed (if you are coming from a computer science background, or read a few articles about how increasingly parallel we need to start making our programs, because the <a href="http://en.wikipedia.org/wiki/Moore's_law">Moore&rsquo;s Law</a> is not going to last forever and so on) the idea is not new at all. Actually in computer technology terms it&rsquo;s ancient history. I have come across a <a href="http://cacm.acm.org/magazines/2010/6/92479-the-resurgence-of-parallelism/fulltext">Communications of the ACM article</a> which had a section about <i>Determinate Computation</i> explaining the idea of using blocking tasks communicating through FIFO queues rather than shared memory. <br />
+I have been working with C# quite some time now and since I have used blocking queues (which I find very similar to Go Channels) for similar concurrency purposes before. It was a natural flow of thinking that I needed to implement some generic functionality and make it available to my applications in .Net. Although I must stress that; this is just an experiment and it is far from being a complete implementation. There are other crucial features missing to make it really useful and it is not test much and it is not used in production at all.</p>
+
+<p>The <a href="https://github.com/mtmk/cschan/blob/master/cschan/IChannel.cs">interface</a> is very simple; there are only to methods, <span style="font-family: monospace;">Put(item)</span> and <span style="font-family: monospace;">Get() : item</span>. And there are two very simple behaviours; &lsquo;put&rsquo; blocks when the capacity is full, &lsquo;get&rsquo; blocks when there is nothing in the channel. For example in client code you can create your threads and share <i>IChannel<t></t></i> instances where you can use a set of threads as <a href="http://en.wikipedia.org/wiki/Producer-consumer_problem">producers and consumers</a> or you can use them for simple notifications. <br />
+<pre class="brush: csharp">var c = new Channel&lt;int&gt;(5);</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">var</span> t1 = <span style="color:#66d9ef">new</span> Thread(() =&gt;
+    {
+        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i = <span style="color:#ae81ff">0</span>; i &amp;lt; <span style="color:#ae81ff">10</span>; i++)
+            c.Put(i);
+    });
+
+<span style="color:#66d9ef">var</span> t2 = <span style="color:#66d9ef">new</span> Thread(() =&gt;
+    {
+        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i = <span style="color:#ae81ff">0</span>; i &amp;lt; <span style="color:#ae81ff">10</span>; i++)
+            Console.WriteLine(c.Get());
+    });
+
+t1.Start();
+t2.Start();
+t1.Join();
+t2.Join();</code></pre></div>
+
+<p>In the above simple example you would always have sequential numbers printed in ascending order e.g. 0, 1, 2, 3, &hellip; This might not sound very interesting but notice I did&rsquo;t have to use any synchronisation mechanisms to achieve a deterministic output.  Same example code can be used in several threads with many channels working together.</p>
+
+<p>Having a quick look at the implementation actually reveals all the tricky synchronisation is handled so I don&rsquo;t have to in my client code. I am basically using a Queue to store items and two Semaphores to block Gets and Puts as the queue runs out and capacity is reached respectively. Here is the constructor:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">readonly</span> Queue&lt;T&gt; _q = <span style="color:#66d9ef">new</span> Queue&lt;T&gt;();
+<span style="color:#66d9ef">private</span> <span style="color:#66d9ef">readonly</span> Semaphore _sPut;
+<span style="color:#66d9ef">private</span> <span style="color:#66d9ef">readonly</span> Semaphore _sGet;
+
+<span style="color:#66d9ef">public</span> Channel(<span style="color:#66d9ef">int</span> capacity)
+{
+    _sPut = <span style="color:#66d9ef">new</span> Semaphore(capacity, capacity);
+    _sGet = <span style="color:#66d9ef">new</span> Semaphore(<span style="color:#ae81ff">0</span>, capacity);
+}</code></pre></div>
+
+<p>There is a bit more to it in the <a href="https://github.com/mtmk/cschan/blob/master/cschan/Channel.cs">code repository</a> (to handle clean exits and so on) but above snippet shows the guts of it.  Similarly Put and Get methods are fairly simple without the details:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> Put(T item)
+{
+    <span style="color:#66d9ef">lock</span> (_guard)
+    {
+        _sGet.Release();
+        _q.Enqueue(item);
+    }
+}
+
+<span style="color:#66d9ef">public</span> T Get()
+{
+    <span style="color:#66d9ef">lock</span> (_guard)
+    {
+        _sPut.Release();
+        <span style="color:#66d9ef">return</span> _q.Dequeue();
+    }
+}</code></pre></div>
+
+<p>As you can see this isn&rsquo;t much different from a <a href="http://blogs.msdn.com/b/toub/archive/2006/04/12/blocking-queues.aspx">standard blocking queue</a> or <a href="http://en.wikipedia.org/wiki/Producer-consumer_problem">producer/consumer</a> implementation (only difference is I am blocking on Puts as well -when the queue is full). The real challenge with this implementation would be implementing the Channel class (or Get and Put return types) in such a way so it behaves like a <i>WaitHandle </i>and can be used with multiple channels blocking on <i>Gets </i>or <i>Puts </i>to support more useful scenarios. I suspect this would require some low level unmanaged code. In the <a href="https://github.com/mtmk/cschan">example implementation</a> you can see I took the initial steps towards this direction by returning a result object from Get and Put methods.</p>
+</div>
+  <div>September 03, 2010 | 810 Words</div>
+  <div>
+    
+  </div>
+  <div>
+    
+  </div>
+
+            </div>
+        </div>
+    </body>
+</html>

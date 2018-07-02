@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="generator" content="Hugo 0.38.2" />
+
+        
+        <meta charset="utf-8">
+        <title>RSA Encryption and Decryption on the Web</title>
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        
+        <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+        
+        <link rel="stylesheet" href="/css/normalize.css">
+        <link rel="stylesheet" href="/css/skeleton.css">
+
+        
+        <link rel="icon" type="image/png" href="images/favicon.png">
+
+    </head>
+    <body>
+
+        
+        <div class="container">
+            <div class="row">
+
+
+                
+  <h1>RSA Encryption and Decryption on the Web</h1>
+  <div>
+
+<p>If you cannot enable SSL for whatever reason, you might still want to encrypt your sensitive information (such as passwords) over the wire. In this post I tried to put together a solution with working examples from various languages to make the client server communication secure using public cryptography with RSA.</p>
+
+<p>This post focuses on C# and Javascript interoperability. Below is a C# example using <a href="http://www.bouncycastle.org/csharp/">Bouncycastle project</a>:</p>
+
+<p>{% highlight c# %}
+const string PrivateKey = @&ldquo;&mdash;&ndash;BEGIN RSA PRIVATE KEY&mdash;&ndash;
+MIICXgIBAAKBgQDOFfwbqHOmQWYc50XxsR+dLyNUSwsaQ3tx225AvYEOs9bSS3VV
+&hellip;.
+4/uGrlWiOG8EHeL1RUW/s5LezT1RFlL15RuSq4tHH/GI6w==
+&mdash;&ndash;END RSA PRIVATE KEY&mdash;&ndash;
+&ldquo;;</p>
+
+<p>readonly Lazy<IAsymmetricBlockCipher> _cipher = new Lazy<IAsymmetricBlockCipher>(() =&gt;
+{
+    var rsa = new Pkcs1Encoding(new RsaEngine());
+    var pemReader = new PemReader(new StringReader(PrivateKey));
+    var keyPair = (AsymmetricCipherKeyPair)pemReader.ReadObject();
+    rsa.Init(false, keyPair.Private);
+    return rsa;
+});</p>
+
+<p>string Decrypt(string base64Input)
+{
+    var buf = Convert.FromBase64String(base64Input);
+    byte[] block = _cipher.Value.ProcessBlock(buf, 0, buf.Length);</p>
+
+<pre><code>return Encoding.UTF8.GetString(block);
+</code></pre>
+
+<p>}
+{% endhighlight %}</p>
+
+<p>As for the client side I used the <a href="http://travistidwell.com/jsencrypt/">JSEncrypt project</a> which has a extremely simple API:</p>
+
+<p>{% highlight javascript %}
+ var crypt = new JSEncrypt();
+crypt.setPublicKey(&lsquo;&mdash;&ndash;BEGIN PUBLIC KEY&mdash;&ndash;&hellip;.&mdash;&ndash;END PUBLIC KEY&mdash;&ndash;&rsquo;);
+var enc = crypt.encrypt($scope.secret);
+{% endhighlight %}</p>
+
+<p>All the examples keys can be generated using <a href="https://www.openssl.org">OpenSSL</a>. You can also validate encryption and decryption results too.</p>
+
+<p>{% highlight bash %}</p>
+
+<h1 id="generate-new-keys">Generate new keys:</h1>
+
+<blockquote>
+<p>openssl genrsa -out key.pem 1024
+openssl rsa -pubout -in key.pem -out public_key.pem</p>
+</blockquote>
+
+<h1 id="encrypt-using-public-key">Encrypt using public key:</h1>
+
+<blockquote>
+<p>echo &ldquo;Text to encript&rdquo; | openssl rsautl -encrypt -inkey public_key.pem -pubin -out enc.bin
+openssl base64 -e -in out.enc -out enc.txt</p>
+</blockquote>
+
+<h1 id="decrypt-using-private-key">Decrypt using private key:</h1>
+
+<blockquote>
+<p>openssl base64 -d -in enc.txt -out enc.bin
+openssl rsautl -decrypt -inkey key.pem -in enc.bin
+{% endhighlight %}</p>
+</blockquote>
+
+<p>It sounds like it could be easy to find other examples in various languages too. For Objective-C examples check out <a href="https://launchkey.com/docs/api/encryption/objective-c/commoncrypto">Launckey documentation for encryption</a>.</p>
+
+<p>You can find a simple web application (in ASP.Net WebAPI) <a href="https://github.com/mtmk/secpassx/tree/master/RsaInteropExample/SecPassXchange">under mtmk GitHub secpassx repository</a>.</p>
+
+<p>Enjoy</p>
+</div>
+  <div>March 15, 2015 | 295 Words</div>
+  <div>
+    
+  </div>
+  <div>
+    
+  </div>
+
+            </div>
+        </div>
+    </body>
+</html>

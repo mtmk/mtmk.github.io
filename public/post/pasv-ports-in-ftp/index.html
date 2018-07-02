@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="generator" content="Hugo 0.38.2" />
+
+        
+        <meta charset="utf-8">
+        <title>PASV ports in FTP</title>
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        
+        <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+        
+        <link rel="stylesheet" href="/css/normalize.css">
+        <link rel="stylesheet" href="/css/skeleton.css">
+
+        
+        <link rel="icon" type="image/png" href="images/favicon.png">
+
+    </head>
+    <body>
+
+        
+        <div class="container">
+            <div class="row">
+
+
+                
+  <h1>PASV ports in FTP</h1>
+  <div><p>I was looking to simulate an embedded device for testing and looking into FTP server implementations a simple bitwise operations question popped up: the way PASV command is standardized requires TCP port numbers to be transferred in two octets represented as integers.</p>
+
+<p>This is how the server responds to a PASV command:</p>
+
+<p>{% highlight bash %}
+227 Entering Passive Mode (h1,h2,h3,h4,p1,p2).
+{% endhighlight %}</p>
+
+<p>Which indicates and IP address and a port number. To find the IP address is easy. it&rsquo;s only the first four octets. Port number requires a little math: p1 * 256 + p2. That&rsquo;s all fine and documented quite a bit. But in a server implementation one needs to figure out these octets from a short integer as the port number:</p>
+
+<p>{% highlight c# %}
+p1 = port &gt;&gt; 8
+p2 = port &amp; 255
+{% endhighlight %}</p>
+
+<p>I just like bitwise operations so much, I though this little experiment deserved a note on the side.</p>
+
+<p>Enjoy</p>
+</div>
+  <div>March 25, 2015 | 161 Words</div>
+  <div>
+    
+  </div>
+  <div>
+    
+  </div>
+
+            </div>
+        </div>
+    </body>
+</html>

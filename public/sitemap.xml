@@ -1,37 +1,60 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<?xml-stylesheet type="text/xsl" href="http://ziya.suzen.net/sitemap.xsl"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://ziya.suzen.net/post/first/</loc>
-    <lastmod>2018-06-25T08:53:46+01:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://ziya.suzen.net/categories/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0</priority>
+    <loc>http://ziya.suzen.net/post/switch_to_hugo/</loc>
+    <lastmod>2018-06-25T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>http://ziya.suzen.net/</loc>
-    <lastmod>2018-06-25T08:53:46+01:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0</priority>
+    <lastmod>2018-06-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ziya.suzen.net/post/pasv-ports-in-ftp/</loc>
+    <lastmod>2015-03-25T23:30:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ziya.suzen.net/post/rsa-encrypt-decrypt-interop/</loc>
+    <lastmod>2015-03-15T22:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ziya.suzen.net/post/simple-cache-manager-dot-net/</loc>
+    <lastmod>2015-03-11T17:30:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ziya.suzen.net/post/simple-logging-for-aspnet-webapi-clients/</loc>
+    <lastmod>2015-02-28T19:30:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ziya.suzen.net/post/github-and-jekyll/</loc>
+    <lastmod>2015-02-15T22:18:04+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ziya.suzen.net/post/csharp-channels/</loc>
+    <lastmod>2010-09-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ziya.suzen.net/post/aspnet-cgi-handler/</loc>
+    <lastmod>2009-06-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ziya.suzen.net/post/mysqlexception-unable-to-connect-to-any-of-the-specified-mysql-hosts/</loc>
+    <lastmod>2009-01-02T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>http://ziya.suzen.net/post/</loc>
-    <lastmod>2018-06-25T08:53:46+01:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://ziya.suzen.net/tags/</loc>
-    <changefreq>weekly</changefreq>
+    <lastmod>2018-06-25T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
