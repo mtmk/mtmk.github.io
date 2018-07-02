@@ -49,14 +49,16 @@
             <div class="row">
                 
   <h1>Finally Switched to Hugo</h1>
-  <div><p>I have been looking into using Hugo for a long time. Finally managed to make
-the transition. Also I decided not to use a ready made theme and created my simple layout.</p>
+  <div><p>I have been looking into using <a href="https://gohugo.io">Hugo</a> for a long time.
+Finally managed to make the transition. Also I decided not to use a
+ready made theme and created my simple layout and CSS using
+<a href="http://getskeleton.com">Skeleton</a> as my CSS framework.</p>
 
 <p></p>
 
-<p><a href="http://getskeleton.com">http://getskeleton.com</a></p>
+<p><a href="https://gohugo.io/content-management/syntax-highlighting/">Syntax highlighting</a> is an other area I am keen to use, since I usually have at least one or two code samples in my posts.</p>
 
-<p><a href="https://gohugo.io">https://gohugo.io</a></p>
+<p>Here are two sample HTML and C# blocks.</p>
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">section</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;main&#34;</span>&gt;
   &lt;<span style="color:#f92672">div</span>&gt;
@@ -67,14 +69,29 @@ the transition. Also I decided not to use a ready made theme and created my simp
   &lt;/<span style="color:#f92672">div</span>&gt;
 &lt;/<span style="color:#f92672">section</span>&gt;</code></pre></div>
 
-<p><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Program</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Program</span>
 {
   <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> Main(<span style="color:#66d9ef">string</span> args)
   {
     System.Console.WriteLine(<span style="color:#e6db74">&#34;Hello world!&#34;</span>);
   }
-}</code></pre></div></p></div>
-  <div>June 25, 2018 | 67 Words</div>
+}</code></pre></div>
+
+<p>All the source is available in <a href="https://github.com/mtmk/mtmk.github.io/tree/master/_hugo_site">my GitHub Pages repo</a>. Feel free to compy and experiment with it.</p>
+
+<p>Finally this is how you would generate and publish your site (also not to myself)</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">  git clone mtmk.github.io
+  cd mtmk.github.io
+  cd _hugo_site
+  hugo -d ..
+  cd ..
+  git add .
+  git commit -m <span style="color:#e6db74">&#39;New content&#39;</span>
+  git push</code></pre></div>
+
+<p>Enjoy!</p></div>
+  <div>June 25, 2018 | 162 Words</div>
   <div>
     
   </div>

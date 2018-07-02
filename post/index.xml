@@ -16,8 +16,10 @@
       <pubDate>Mon, 25 Jun 2018 00:00:00 +0000</pubDate>
       
       <guid>http://ziya.suzen.net/post/switch_to_hugo/</guid>
-      <description>&lt;p&gt;I have been looking into using Hugo for a long time. Finally managed to make
-the transition. Also I decided not to use a ready made theme and created my simple layout.&lt;/p&gt;
+      <description>&lt;p&gt;I have been looking into using &lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt; for a long time.
+Finally managed to make the transition. Also I decided not to use a
+ready made theme and created my simple layout and CSS using
+&lt;a href=&#34;http://getskeleton.com&#34;&gt;Skeleton&lt;/a&gt; as my CSS framework.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
     </item>
