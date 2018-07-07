@@ -37,7 +37,7 @@ public class Program
 
 All the source is available in [my GitHub Pages repo](https://github.com/mtmk/mtmk.github.io/tree/master/_hugo_site). Feel free to compy and experiment with it.
 
-Finally this is how you would generate and publish your site (also not to myself)
+Finally this is how you would generate and publish your site (also note to myself)
 
 {{< highlight bash >}}
   git clone mtmk.github.io
