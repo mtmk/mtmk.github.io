@@ -16,9 +16,9 @@
         <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
 
         
-        <link rel="stylesheet" href="/css/main2.css">
         <link rel="stylesheet" href="/css/normalize.css">
         <link rel="stylesheet" href="/css/skeleton.css">
+        <link rel="stylesheet" href="/css/main2.css">
 
         
         <link rel="icon" type="image/png" href="images/favicon.png">
@@ -42,6 +42,7 @@
                         <div class="trigger">
                                 <a class="page-link" href="/post/">All Posts</a>
                                 <a class="page-link" href="/about/">About</a>
+                                <a class="page-link" href="/go/">Go</a>
                         </div>
                     </nav>
                 </div>
@@ -49,7 +50,7 @@
             <div class="row">
                 
   <h1>C# channels</h1>
-  <div><p><a href="http://golang.org/">Go</a> is one of the new languages I came across and found interesting from a few of different angles.</p>
+  <article><p><a href="http://golang.org/">Go</a> is one of the new languages I came across and found interesting from a few of different angles.</p>
 
 <p></p>
 
@@ -113,7 +114,7 @@ t2.Join();</code></pre></div>
     }
 }</code></pre></div>
 
-<p>As you can see this isn&rsquo;t much different from a <a href="http://blogs.msdn.com/b/toub/archive/2006/04/12/blocking-queues.aspx">standard blocking queue</a> or <a href="http://en.wikipedia.org/wiki/Producer-consumer_problem">producer/consumer</a> implementation (only difference is I am blocking on Puts as well -when the queue is full). The real challenge with this implementation would be implementing the Channel class (or Get and Put return types) in such a way so it behaves like a WaitHandle and can be used with multiple channels blocking on Gets or Puts to support more useful scenarios. I suspect this would require some low level unmanaged code. In the <a href="https://github.com/mtmk/cschan">example implementation</a> you can see I took the initial steps towards this direction by returning a result object from Get and Put methods.</p></div>
+<p>As you can see this isn&rsquo;t much different from a <a href="http://blogs.msdn.com/b/toub/archive/2006/04/12/blocking-queues.aspx">standard blocking queue</a> or <a href="http://en.wikipedia.org/wiki/Producer-consumer_problem">producer/consumer</a> implementation (only difference is I am blocking on Puts as well -when the queue is full). The real challenge with this implementation would be implementing the Channel class (or Get and Put return types) in such a way so it behaves like a WaitHandle and can be used with multiple channels blocking on Gets or Puts to support more useful scenarios. I suspect this would require some low level unmanaged code. In the <a href="https://github.com/mtmk/cschan">example implementation</a> you can see I took the initial steps towards this direction by returning a result object from Get and Put methods.</p></article>
   <div>September 03, 2010 | 810 Words</div>
   <div>
     

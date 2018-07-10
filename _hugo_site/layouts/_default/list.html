@@ -1,6 +1,6 @@
 {{ define "main" }}
   <h1>{{ .Title }}</h1>
-  <p>{{ .Content }}</p>
+	<article class="article-content">{{ .Content }}</article>
   {{ range .Data.Pages }}
   <article>
     <!-- this <div> includes the title summary -->

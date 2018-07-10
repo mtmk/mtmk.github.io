@@ -1,6 +1,6 @@
 {{ define "main" }}
   <h1>{{ .Title }}</h1>
-  <div>{{ .Content }}</div>
+  <article>{{ .Content }}</article>
   <div>{{ .Date.Format "January 02, 2006" }} | {{ .WordCount }} Words</div>
   <div>
     {{ with .Params.topics }}
